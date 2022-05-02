@@ -1,0 +1,43 @@
+{% extends './base.html' %}
+{% load static %}
+
+{% block title %}
+{{ post.title }}
+{% endblock %}
+
+{% block header %}
+{% include './block/header.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            <nav aria-label="breadcrumb" class="mt-4">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'myblog:index' %}">Main Page</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ post.h1 }}</li>
+                </ol>
+            </nav>
+            <img class="img-fluid rounded " src="{{ post.image.url }}" alt="">
+            <hr>
+            <p class="lead">
+            {{ post.content|safe }}
+            </p>
+            <div class="d-flex justify-content-end">
+                {% for tag in post.tag.all %}
+                    <a href="{% url 'myblog:tag' tag.slug %}" class="mr-1 my-2 badge" style="color:#0d6efd">#{{ tag }}</a>
+                {% endfor %}
+            </div>
+            <hr>
+            <p class="lead text-right">Author: {{ post.author }}</p>
+            <hr>
+            <p class="text-right">Published at {{ post.created_at }}</p>
+            <hr>
+            {% include './block/comments.html' %}
+        </div>
+        {% include './block/aside.html' %}
+    </div>
+</div>
+</div>
+{% endblock %}

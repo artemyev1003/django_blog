@@ -1,0 +1,27 @@
+<div class="card my-4">
+    <h5 class="card-header">Comment:</h5>
+    {% if user.is_authenticated %}
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ comment_form.text }}
+            </div>
+            <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+    </div>
+    {% else %}
+    <h6 class="card-header"><a href="{% url 'myblog:signin' %}">Please log in</a>
+        or <a href="{% url 'myblog:signup' %}">sign up</a> to leave a comment</h6>
+    {% endif %}
+</div>
+
+{% for comment in post.comments.all %}
+<div class="media mb-4">
+    <img class="d-flex mr-3" src="http://placekitten.com/50/75" alt="">
+    <div class="media-body">
+        <h5 class="mt-0">{{comment.username}}</h5>
+        {{comment.text}}
+    </div>
+</div>
+{% endfor %}

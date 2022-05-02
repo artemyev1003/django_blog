@@ -1,0 +1,12 @@
+spa_venv
+db.sqlite3
+blog/blog/.env
+blog/media
+blog/myblog/migrations
+blog/myblog/static/img
+blog/static
+.idea
+blog/myblog/__pycache__
+blog/blog/__pycache__
+
+
